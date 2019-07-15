@@ -2,8 +2,8 @@ console.clear();
 
 var wrapForm = document.getElementById('wrapForm');
 var descriptionForm = document.getElementById('descriptionForm');
-var btnAddCity = document.getElementById('btnAddCity');
-var btnAddPlace = document.getElementById('btnAddPlace');
+var btnAddCity = document.getElementById('btn_1');
+var btnAddPlace = document.getElementById('btn_2');
 var btn = document.getElementsByTagName('button')[0];
 var cityForm = createCityForm();
 var placeForm = createPlaceForm();
@@ -16,10 +16,18 @@ addPlaceFormNew(); //  Нажимаем add placeb Добавление форм
 btnEffect(); // Подсветка кнопки add city
 
 
+
+
+
+
 /*
 var btnClose = document.getElementById('Close');
 btnClose.addEventListener( "click" , function() {wrapForm.style.backgroundColor = "red"});
 */
+
+
+
+
 
 
 // wrapForm.appendChild(cityFormNew);
@@ -29,6 +37,17 @@ descriptionForm.appendChild(placeForm);  // Показываем сохране�
 
 // console.dir(cityForm);
 // console.log(cityForm);
+
+
+
+// if(btnClose) {
+//   closeForm() ; // Закрытие кнопки после нажатия кнопки Close
+// }
+//  window.onload = function(){
+//   closeForm() ;
+// }
+
+
 
 
 function createTextField(rows, cols, placeholder){
@@ -43,15 +62,19 @@ function createTextField(rows, cols, placeholder){
     return text;
 };
 
-function createButton(value){
+function createButton(value, _parent){
     var btn = document.createElement('input');
-    var ident = value;
+    var ident ='btn' + value;
 
     btn.id = ident;
     btn.value = value;
     btn.type = "button";
     btn.style.cursor = "pointer";
     btn.style.margin = "5px";
+    btn.addEventListener( "click",  function() {
+        _parent.removeChild(_parent.lastChild);
+    });
+
     return btn;
 };
 
@@ -64,65 +87,44 @@ function createParagraph(text){
 };
 
 function createCityFormNew(){
-    var div = document.createElement('div');
-    var indent = "textFormNew";
-    var btn1 = createButton("Save");
-    var btn2 = createButton("Close");
+    var cityFormNew = new CityForm();
+
+    var btnSave = createButton("Save");
+    var btnClose = createButton("Close", wrapForm);
     var txt1 = createTextField("1", "45", "City name");
     var txt2 = createTextField("3", "45", "Notes");
 
-    div.class = indent;
-    div.style.width = "93%";
-    div.style.border = "1px solid black";
-    div.style.borderRadius = "10px";
-    div.style.padding = "10px";
-    div.style.overflow = "hidden";
-    div.style.margin = "5px";
-    div.style.backgroundColor = "green";
+    cityFormNew.div.appendChild(txt1);
+    cityFormNew.div.appendChild(txt2);
 
-    div.appendChild(txt1);
-    div.appendChild(txt2);
+    cityFormNew.div.appendChild(btnSave);
+    cityFormNew.div.appendChild(btnClose);
 
-    div.appendChild(btn1);
-    div.appendChild(btn2);
-
-    return div;
+    return cityFormNew.div;
 };
 
 function createCityForm(){
-    var div2 = createCityFormNew().cloneNode(true);
+    var cityFormNew = new CityForm();
 
-    var indent = "textForm";
-    var btn3 = createButton("Edit");
-    var btn4 = createButton("Delate");
+    var btnEdit = createButton("Edit");
+    var btnDelate = createButton("Delate");
     var p1 = createParagraph("Dnipro");
     var p2 = createParagraph("Lorem ipsum dolor sit amet.");
-    // var txt1 = createTextField("1", "45", "City name");
 
-    div2.class = indent;
 
-    div2.appendChild(p1);
-    div2.appendChild(p2);
+    cityFormNew.div.appendChild(p1);
+    cityFormNew.div.appendChild(p2);
+    cityFormNew.div.appendChild(btnEdit);
+    cityFormNew.div.appendChild(btnDelate);
 
-    // div2.replaceChild(p1, txt1);
-    // div2.replaceChild(p2, txt2);
-    // div2.removeChild(txt1);
-    // div2.appendChild(p1);
-    // div2.removeChild(txt1);
-    // div2.appendChild(p2);
-
-    // div2.replaceChild(btn3, btn1);
-    // div2.replaceChild(btn4, btn2);
-
-    div2.appendChild(btn3);
-    div2.appendChild(btn4);
-
-    return div2;
+    return cityFormNew.div;
 };
+
 function addCityForm() {
     var cityFormNew = createCityFormNew();
     btnAddCity.addEventListener( "click" , function() {wrapForm.appendChild(cityFormNew)});
 };
+
 function btnEffect() {
     var btn = document.getElementsByTagName('button')[0];
 
@@ -160,67 +162,72 @@ function createPrioritet(){
 
 
 function createPlaceFormNew(){
-    var div = document.createElement('div');
-    var indent = "textPlaceFormNew";
+    var placeForm = new PlaceForm();
+
     var btn1 = createButton("Save");
-    var btn2 = createButton("Close");
+    var btn2 = createButton("Close", descriptionForm);
     var txt1 = createTextField("3", "45", "Notes");
     var select = createPrioritet();
 
+    placeForm.div.appendChild(txt1);
+    placeForm.div.appendChild(select);
+    placeForm.div.appendChild(btn1);
+    placeForm.div.appendChild(btn2);
 
-    div.class = indent;
-    div.style.width = "93%";
-    div.style.border = "1px solid black";
-    div.style.borderRadius = "10px";
-    div.style.padding = "10px";
-    div.style.overflow = "hidden";
-    div.style.margin = "5px";
-    div.style.backgroundColor = "green";
-
-    div.appendChild(txt1);
-    div.appendChild(select);
-    div.appendChild(btn1);
-    div.appendChild(btn2);
-
-    return div;
+    return placeForm.div;
 };
 
 function createPlaceForm(){
-    var div2 = createPlaceFormNew().cloneNode(true);
+    var placeForm = new PlaceForm();
 
-    var indent = "textPlaceForm";
-    var btn3 = createButton("Edit");
-    var btn4 = createButton("Delate");
+    var btnEdit = createButton("Edit");
+    var btnDelate = createButton("Delate");
     var p1 = createParagraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua");
 
-    // var txt1 = createTextField("1", "45", "City name");
 
-    div2.class = indent;
+    placeForm.div.appendChild(p1);
 
-    div2.appendChild(p1);
+    placeForm.div.appendChild(btnEdit);
+    placeForm.div.appendChild(btnDelate);
 
-    // div2.replaceChild(p1, txt1);
-    // div2.replaceChild(p2, txt2);
-    // div2.removeChild(txt1);
-    // div2.appendChild(p1);
-    // div2.removeChild(txt1);
-    // div2.appendChild(p2);
-
-    // div2.replaceChild(btn3, btn1);
-    // div2.replaceChild(btn4, btn2);
-
-    div2.appendChild(btn3);
-    div2.appendChild(btn4);
-
-    return div2;
+    return placeForm.div;
 };
 
 
 function addPlaceFormNew() {
     var placeFormNew = createPlaceFormNew();
-    btnAddPlace.addEventListener( "click" , function() {descriptionForm.insertBefore(placeFormNew, descriptionForm.children[0])});
+    btnAddPlace.addEventListener( "click" , function() {descriptionForm.appendChild(placeFormNew)});
 };
 
-function closeForm() {
+// конструкторы
+
+
+function CityForm() {
+    this.div = document.createElement('div');
+    this.div.indent = "textFormNew";
+
+    this.div.class = "indent";
+    this.div.style.width = "90%";
+    this.div.style.border = "1px solid black";
+    this.div.style.borderRadius = "10px";
+    this.div.style.padding = "10px";
+    this.div.style.overflow = "hidden";
+    this.div.style.margin = "5px";
+    this.div.style.backgroundColor = "green";
+
+};
+
+function PlaceForm() {
+    this.div = document.createElement('div');
+    this.div.indent = "textPlaceFormNew";
+
+    this.div.class = "indentPace";
+    this.div.style.width = "93%";
+    this.div.style.border = "1px solid black";
+    this.div.style.borderRadius = "10px";
+    this.div.style.padding = "10px";
+    this.div.style.overflow = "hidden";
+    this.div.style.margin = "5px";
+    this.div.style.backgroundColor = "green";
 
 }
