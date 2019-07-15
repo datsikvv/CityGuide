@@ -1,0 +1,70 @@
+body{
+    margin: 0px;
+}
+#wrap{
+    background-color: #cacaca;
+    width: 100%;
+}
+#wrap-left{
+    background-color: #cacaca;
+    width: 25%;
+    float: left;
+    height: 600px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#wrap-right{
+    background-color: #cacaca;
+    width: 74%;
+    height: 600px;
+    float: left;
+    border-left: 2px solid gray;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-between;
+    overflow: auto;
+}
+button {
+    width: 93%;
+    height: 50px;
+    border-radius: 10px;
+}
+#textForm {
+    width: 93%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+    margin: 5px;
+}
+#dateArea {
+    width: 95%;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 3px;
+}
+#descriptionForm {
+    width: 95%;
+    overflow: hidden;
+    margin: 5px;
+}
+.placeForm {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+textarea {
+    width: 95%;
+}
+#wrapForm {
+    height: 100%;
+    margin: 5px;
+    width: 95%;
+    overflow: auto;
+}
